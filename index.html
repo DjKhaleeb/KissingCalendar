@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kissing Calendar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background-color: #f398c1;">
+    <div class="container">
+        <h1>Kissing Calendar</h1>
+        <div class="countdown" id="countdown">
+            Loading...
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const currentYear = new Date().getFullYear();
+            const eventDate = new Date(`August 17, ${currentYear} 00:00:00`);
+            const now = new Date();
+            const timeDifference = eventDate - now;
+
+            if (timeDifference > 0) {
+                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                document.getElementById('countdown').innerHTML = `${days} day${days !== 1 ? 's' : ''} left!`;
+            } else if (timeDifference <= 0 && now.getDate() === 17 && now.getMonth() === 7) {
+                document.getElementById('countdown').innerHTML = `Today is August 17!`;
+            } else {
+                const nextYear = currentYear + 1;
+                const nextEventDate = new Date(`August 17, ${nextYear} 00:00:00`);
+                const nextTimeDifference = nextEventDate - now;
+                const days = Math.floor(nextTimeDifference / (1000 * 60 * 60 * 24));
+                document.getElementById('countdown').innerHTML = `${days} day${days !== 1 ? 's' : ''} left!`;
+            }
+        }
+
+        updateCountdown();
+        setInterval(updateCountdown, 1000 * 60 * 60); // Update every hour
+    </script>
+    <div class="audio">
+        <audio controls autoplay loop src="Kiss Me.mp3"></audio>
+    </div>
+
+    <div class="hellokitty">
+        <img src="hellokitty.jpg" style="width: 300px;">
+    </div>
+
+</body>
+</html>
